@@ -167,7 +167,8 @@ void memory_init()
 void prepage(pcb)
 PCB *pcb;
 {
-
+// como é por demanda, então não precisa implementar essa função pois no manual diz que por default a função em branco  pode demanda
+// case tenha interesse de carregar páginas previamente então tem que implementar a função prepaging e a prepage
 }
 
 
@@ -175,7 +176,7 @@ PCB *pcb;
 int start_cost(pcb)
 PCB *pcb;
 {
-
+// 
 }
 
 
