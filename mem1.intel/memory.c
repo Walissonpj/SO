@@ -211,10 +211,12 @@ int removeFrame(){
 
 int segundaChance(){
     int page_id = removeFrame(); // pega a pagina do inicio da fila
-    while( *Frame_Tbl[page_id].hook != 0 || Frame_Tbl[page_id].lock_count > 0){ // se a pagina estiver referenciada ou tiver bloqueada então não pode remover... da uma chance pra ela
+    int size = PTFila.tamanho;
+    while( size > 0 && (*Frame_Tbl[page_id].hook != 0 || Frame_Tbl[page_id].lock_count > 0)){ // se a pagina estiver referenciada ou tiver bloqueada então não pode remover... da uma chance pra ela
       *Frame_Tbl[page_id].hook  = 0; // marca como não referenciada
       insereFrame(page_id); // teve sorte... vai pro final da fila
       page_id = removeFrame(); // pega a página do inicio da fila
+      size--;
     }
     *Frame_Tbl[page_id].hook = 1;
     return page_id;
