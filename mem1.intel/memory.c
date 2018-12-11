@@ -281,7 +281,7 @@ int page_id;
   if(Frame_Tbl[id].free == false){ // se a página estava sendo utilizada por algum processo
     id_page = Frame_Tbl[id].page_id; // pega o id do processo que utilizou essa pagina anteriormente
     Frame_Tbl[id].pcb->page_tlb->page_entry[id_page].valid = false;// agora esse processo não referencia ela mais
-    if( Frame_Tbl[id].dirty) // se o bit sujo estiver ativo então foi modificada e é preciso gravar a pagina em disco
+    if( Frame_Tbl[id].dirty == true) // se o bit sujo estiver ativo então foi modificada e é preciso gravar a pagina em disco
       siodrum(write, Frame_Tbl[id].pcb, Frame_Tbl[id].page_id, id); // grava a pagina no disco
   }
   siodrum(read, pcb, page_id, id); // lê do disco
@@ -289,8 +289,8 @@ int page_id;
   Frame_Tbl[id].dirty = false; // como acabou de ler e nao modificou fica false mesmo
   Frame_Tbl[id].page_id = page_id; // id da nova pagina carregada
   Frame_Tbl[id].pcb = pcb; // processo da página
-  pcb->page_tlb->page_entry[id_page].valid = true; // processo ta referenciando essa pagina
-  pcb->page_tlb->page_entry[id_page].frame_id = id; // armazena o endereço fisico da pagina
+  pcb->page_tlb->page_entry[page_id].valid = true; // processo ta referenciando essa pagina
+  pcb->page_tlb->page_entry[page_id].frame_id = id; // armazena o endereço fisico da pagina
  *Frame_Tbl[id].hook = 1;// pagina referenciada recentemente...  
 }
 
