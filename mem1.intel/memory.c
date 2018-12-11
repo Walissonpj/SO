@@ -261,17 +261,39 @@ PCB *pcb;
 void page_fault(PCB *pcb, int page_id){
     Int_Vector.cause = pagefault;  // interrupção causada por falta de página 
     Int_Vector.page_id = page_id; // id da pagina que não foi referenciada na memória física
-    Int_Vector.pcb = pcb; // processo 
+    Int_Vector.pcb = pcb; // processo da página
     gen_int_handler();  //suspende o processo atual e transfere o controle para o módulo PAGEINT. USADO PARA SIMULAR FALTA DE PAGINA
 }
-
 
 void get_page(pcb,page_id)
 PCB *pcb;
 int page_id;
 {
-
+  int id, id_page;
+  for( id = 0 ; id < MAX_FRAME; ++id){
+    if(Frame_Tbl[id].free  == true && Frame_Tbl[id].lock_count == 0){
+      break;
+    }
+  }
+  if( id == MAX_FRAME) // se entrar nesse if então está com falta de página...
+    id = segundaChance(); // algoritmo responsavel por encontrar uma página para ser removida
+ 
+  if(Frame_Tbl[id].free == false){ // se a página estava sendo utilizada por algum processo
+    id_page = Frame_Tbl[id].page_id; // pega o id do processo que utilizou essa pagina anteriormente
+    Frame_Tbl[id].pcb->page_tlb->page_entry[id_page].valid = false;// agora esse processo não referencia ela mais
+    if( Frame_Tbl[id].dirty) // se o bit sujo estiver ativo então foi modificada e é preciso gravar a pagina em disco
+      siodrum(write, Frame_Tbl[id].pcb, Frame_Tbl[id].page_id, id); // grava a pagina no disco
+  }
+  siodrum(read, pcb, page_id, id); // lê do disco
+  Frame_Tbl[id].free = false; // pagina agora está sendo utilizada por um processo
+  Frame_Tbl[id].dirty = false; // como acabou de ler e nao modificou fica false mesmo
+  Frame_Tbl[id].page_id = page_id; // id da nova pagina carregada
+  Frame_Tbl[id].pcb = pcb; // processo da página
+  pcb->page_tlb->page_entry[id_page].valid = true; // processo ta referenciando essa pagina
+  pcb->page_tlb->page_entry[id_page].frame_id = id; // armazena o endereço fisico da pagina
+ *Frame_Tbl[id].hook = 1;// pagina referenciada recentemente...  
 }
+
 
 
 
