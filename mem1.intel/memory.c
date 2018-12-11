@@ -271,7 +271,7 @@ int page_id;
 {
   int id, id_page;
   for( id = 0 ; id < MAX_FRAME; ++id){
-    if(Frame_Tbl[id].free  == true && Frame_Tbl[id].lock_count == 0){
+    if(Frame_Tbl[id].free  == true && Frame_Tbl[id].lock_count == 0){  // se não tiver bloqueio e nem foi referenciada a pouco tempo  então escolhe ela
       break;
     }
   }
