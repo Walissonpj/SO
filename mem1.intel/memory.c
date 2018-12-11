@@ -300,7 +300,7 @@ REFER_ACTION action;
     PAGE_ENTRY *page = pcb->page_tbl->page_entry + page_id // pagina referenciada;
 
     if(!page->valid) // caso a pagina esteja fora da memória
-        pageFault(pcb, page_id); // chama função que faz de páginas swap na memória
+        page_fault(pcb, page_id); // chama função que faz de páginas swap na memória
 
     *Frame_Tbl[page->frame_id].hook = 1; // atualiza campo de referencia
 
