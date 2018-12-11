@@ -297,18 +297,26 @@ int page_id;
 
 
 
+
 void lock_page(iorb)
 IORB *iorb;
 {
-
+    int page_id = iorb->page_id;
+    PAGE_ENTRY *page = iorb->pcb->page_tbl->page_entry + page_id;
+    if(page->valid == false) // pagina não está na memoria, então ocorreu falta de pagina
+      page_fault(iorb->pcb, page_id);
+    if(iorb->action == read) // se a ação for de leitura então marca o dirty como true
+      Frame_Tbl[page->frame_id].dirty = true;
+    Frame_Tbl[page->frame_id].lock_count++; // mais um bloqueio
 }
-
 
 
 void unlock_page(iorb)
 IORB  *iorb;
 {
-
+   int page_id = iorb->page_id; // id da pagina
+   PAGE_ENTRY *page = iorb->pcb->page_tbl->page_entry + page_id;
+   Frame_Tbl[page->frame_id].lock_count--;// decrementa o bloqueio
 }
 
 
