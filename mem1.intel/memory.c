@@ -210,13 +210,13 @@ int removeFrame(){
 }
 
 int segundaChance(){
-    int page_id = removeFrame();
-    while( *(Frame_Tbl[page_id].hook) != 0 || Frame_Tbl[page_id].lock_count > 0){
-      *(Frame_Tbl[page_id].hook)  = 0;
-      insereFrame(page_id);
-      page_id = removeFrame();
+    int page_id = removeFrame(); // pega a pagina do inicio da fila
+    while( *(Frame_Tbl[page_id].hook) != 0 || Frame_Tbl[page_id].lock_count > 0){ // se a pagina estiver referenciada ou tiver bloqueada então não pode remover... da uma chance pra ela
+      *Frame_Tbl[page_id].hook  = 0; // marca como não referenciada
+      insereFrame(page_id); // teve sorte... vai pro final da fila
+      page_id = removeFrame(); // pega a página do inicio da fila
     }
-    *(Frame_Tbl[page_id].hook) = 1;
+    *Frame_Tbl[page_id].hook = 1;
     return page_id;
 }
 
@@ -319,14 +319,14 @@ REFER_ACTION action;
     int page_id = logic_addr / PAGE_SIZE; // indice na tabela de páginas
     PCB *pcb = PTBR->pcb; //processo da página referenciada
 
-    PAGE_ENTRY *page = pcb->page_tbl->page_entry + page_id // pagina referenciada;
+    PAGE_ENTRY *page = pcb->page_tbl->page_entry + page_id; // pagina referenciada;
 
     if(!page->valid) // caso a pagina esteja fora da memória
         page_fault(pcb, page_id); // chama função que faz de páginas swap na memória
 
     *Frame_Tbl[page->frame_id].hook = 1; // atualiza campo de referencia
 
-    // se for ação de armazenar ativo o bit de dirty no frame
+    // se for ação de armazenar, ativa o bit de dirty no frame
     if(action == store) 
         Frame_Tbl[page->frame_id].dirty = true;
 }
