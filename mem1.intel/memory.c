@@ -211,7 +211,7 @@ int removeFrame(){
 
 int segundaChance(){
     int page_id = removeFrame(); // pega a pagina do inicio da fila
-    while( *(Frame_Tbl[page_id].hook) != 0 || Frame_Tbl[page_id].lock_count > 0){ // se a pagina estiver referenciada ou tiver bloqueada então não pode remover... da uma chance pra ela
+    while( *Frame_Tbl[page_id].hook != 0 || Frame_Tbl[page_id].lock_count > 0){ // se a pagina estiver referenciada ou tiver bloqueada então não pode remover... da uma chance pra ela
       *Frame_Tbl[page_id].hook  = 0; // marca como não referenciada
       insereFrame(page_id); // teve sorte... vai pro final da fila
       page_id = removeFrame(); // pega a página do inicio da fila
@@ -228,7 +228,7 @@ void memory_init() // serve para iniciar as estruturas que serão utilizadas
 	  if(Frame_Tbl[i].hook == NULL)
 	       exit(EXIT_FAILURE);
 	  *(Frame_Tbl[i].hook) = 0;
-	  i++;
+	  ++i;
 	}
 }
 
@@ -330,7 +330,7 @@ REFER_ACTION action;
     PAGE_ENTRY *page = pcb->page_tbl->page_entry + page_id; // pagina referenciada;
 
     if(!page->valid) // caso a pagina esteja fora da memória
-        page_fault(pcb, page_id); // chama função que faz de páginas swap na memória
+        page_fault(pcb, page_id); // ocorreu falta de página
 
     *Frame_Tbl[page->frame_id].hook = 1; // atualiza campo de referencia
 
