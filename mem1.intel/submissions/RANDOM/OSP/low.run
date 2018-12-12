@@ -1,0 +1,380 @@
+
+
+
+*******************************************************************
+*                                                                 *
+*              WELCOME TO OPERATING SYSTEM PROJECT               *
+*                         Release 1.7                             *
+*                                                                 *
+*******************************************************************
+
+
+
+Copyright (C) 1990  The Research Foundation of SUNY,
+		    Michael Kifer and Scott S. Smolka
+
+(see $HOME/LICENCE for terms and conditions)
+
+
+
+
+================  Summary of Simulation Parameters  ===============
+
+Intensity of New Process Creation               = 4
+Average CPU Time per Process                    = 100
+Overall Frequency of Events                     = 4
+  Share of Memory Related Events                   = 2
+  Share of I/O Related Events                      = 2
+  Share of Resource Related Events                 = 2
+  Share of Socket Related Events                   = 4
+Socket simulation mode                             = stream and dgram
+CPU Time Quantum                                = 100
+Degree of Prepaging                             = 0
+Memory Reference Pattern                        = random
+Deadlock Handling Method                        = avoidance
+Simulation Time                                 = 40000
+Number of Snapshots                             = 4
+Trace Switch                                    = off
+Type of Run                                     = noninteractive
+
+
+
+====================  Beginning of Simulation  ====================
+
+
+
+
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+::                                                               ::
+::                  Snapshot at clock :  10009                   ::
+::                                                               ::
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+
+               S I M C O R E   F R A M E   T A B L E 
+*******************************************************************
+* 0 0 0 0 0 0 0 0 0 0 1 1 1 1 1 1 1 1 1 1 2 2 2 2 2 2 2 2 2 2 3 3 *=Frame_id
+* 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 *
+*-----------------------------------------------------------------*
+* 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 ~ 0 ~ 0 ~ ~ 0 *=Pcb_id
+* 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 ~ 0 ~ 0 ~ ~ 0 *
+* 2 2 3 3 3 3 3 3 3 4 3 3 3 3 4 3 3 3 3 3 3 4 3 4 4 ~ 3 ~ 3 ~ ~ 3 *
+* 2 3 3 3 3 3 0 3 3 0 3 3 3 3 2 6 6 6 6 6 6 0 6 0 2 ~ 0 ~ 0 ~ ~ 0 *
+*-----------------------------------------------------------------*
+* 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 ~ 0 ~ 0 ~ ~ 0 *=Page_id
+* 0 0 0 8 2 4 6 7 3 1 5 9 1 6 2 7 2 1 3 4 5 2 6 0 4 ~ 1 ~ 4 ~ ~ 5 *
+*-----------------------------------------------------------------*
+* 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 *=Lock_count
+*-----------------------------------------------------------------*
+* C D D D D D C D D D C C C D D C C D C C D D C D C C D C C C C D *=Dirty/Clean
+*-----------------------------------------------------------------*
+* n n n n n n n n n n n n n n n n n n n n n n n n n y n y n y y n *=Free/Not
+*******************************************************************
+
+
+
+=====================  Summary of Statistics  ====================
+
+Total num of processes created                            =    43
+  Total num of processes terminated                             =   31
+  Total num of processes killed                                 =    5
+        num of processes in CPU ready queue                     =    1
+        num of processes in event waiting queues                =    5
+
+  Total num of memory references                           =  287
+
+
+CPU utilization                                      =     0.4096
+
+
+Total num of pages swapped in                        =   193
+  due to page faults ( = number of pagefaults )            =   144
+  due to page locks set by I/O                             =    49
+  due to prepaging                                         =     0
+
+Total num of pages swapped out                       =    20
+  due to page faults                                       =    17
+  due to page locks set by I/O                             =     3
+  due to prepaging                                         =     0
+
+Memory utilization                                   =     0.5367
+
+System throughput ( x 1000 )                         =     3.0972
+Average num of processes during simulation           =     4.7170
+Average CPU time per process                         =   114.4419
+Average waiting time per process                     =   999.8605
+Average turnaround time per process                  =  1097.9535
+
+
+
+
+
+
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+::                                                               ::
+::                  Snapshot at clock :  20000                   ::
+::                                                               ::
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+
+               S I M C O R E   F R A M E   T A B L E 
+*******************************************************************
+* 0 0 0 0 0 0 0 0 0 0 1 1 1 1 1 1 1 1 1 1 2 2 2 2 2 2 2 2 2 2 3 3 *=Frame_id
+* 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 *
+*-----------------------------------------------------------------*
+* 0 ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ 0 ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ 0 ~ *=Pcb_id
+* 0 ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ 0 ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ 0 ~ *
+* 8 ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ 8 ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ 8 ~ *
+* 8 ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ 8 ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ 8 ~ *
+*-----------------------------------------------------------------*
+* 0 ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ 0 ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ 0 ~ *=Page_id
+* 3 ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ 2 ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ 1 ~ *
+*-----------------------------------------------------------------*
+* 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 *=Lock_count
+*-----------------------------------------------------------------*
+* D C C C C C C C C C C D C C C C C C C C C C C C C C C C C C D C *=Dirty/Clean
+*-----------------------------------------------------------------*
+* n y y y y y y y y y y n y y y y y y y y y y y y y y y y y y n y *=Free/Not
+*******************************************************************
+
+
+
+=====================  Summary of Statistics  ====================
+
+Total num of processes created                            =    91
+  Total num of processes terminated                             =   82
+  Total num of processes killed                                 =    8
+        num of processes in CPU ready queue                     =    0
+        num of processes in event waiting queues                =    1
+
+  Total num of memory references                           =  672
+
+
+CPU utilization                                      =     0.5086
+
+
+Total num of pages swapped in                        =   429
+  due to page faults ( = number of pagefaults )            =   328
+  due to page locks set by I/O                             =   101
+  due to prepaging                                         =     0
+
+Total num of pages swapped out                       =    37
+  due to page faults                                       =    32
+  due to page locks set by I/O                             =     5
+  due to prepaging                                         =     0
+
+Memory utilization                                   =     0.6554
+
+System throughput ( x 1000 )                         =     4.1000
+Average num of processes during simulation           =     5.6546
+Average CPU time per process                         =   116.0330
+Average waiting time per process                     =  1127.9670
+Average turnaround time per process                  =  1242.7582
+
+
+
+
+
+
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+::                                                               ::
+::                  Snapshot at clock :  30018                   ::
+::                                                               ::
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+
+               S I M C O R E   F R A M E   T A B L E 
+*******************************************************************
+* 0 0 0 0 0 0 0 0 0 0 1 1 1 1 1 1 1 1 1 1 2 2 2 2 2 2 2 2 2 2 3 3 *=Frame_id
+* 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 *
+*-----------------------------------------------------------------*
+* 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 ~ 0 0 0 0 ~ ~ ~ ~ ~ ~ ~ *=Pcb_id
+* 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 ~ 1 1 1 1 ~ ~ ~ ~ ~ ~ ~ *
+* 3 4 3 3 3 4 3 4 3 4 4 3 3 3 3 3 3 4 3 3 ~ 3 4 3 4 ~ ~ ~ ~ ~ ~ ~ *
+* 7 1 6 7 5 1 6 1 5 3 3 7 7 5 5 5 6 5 6 7 ~ 6 5 6 5 ~ ~ ~ ~ ~ ~ ~ *
+*-----------------------------------------------------------------*
+* 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 1 0 ~ 0 0 0 0 ~ ~ ~ ~ ~ ~ ~ *=Page_id
+* 1 1 0 7 3 7 4 6 5 5 3 3 5 4 7 6 0 2 2 1 ~ 2 0 9 1 ~ ~ ~ ~ ~ ~ ~ *
+*-----------------------------------------------------------------*
+* 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 *=Lock_count
+*-----------------------------------------------------------------*
+* D C D C D D D C D D C C D D D D D C D C C C C D C C C C C C C C *=Dirty/Clean
+*-----------------------------------------------------------------*
+* n n n n n n n n n n n n n n n n n n n n y n n n n y y y y y y y *=Free/Not
+*******************************************************************
+
+
+
+=====================  Summary of Statistics  ====================
+
+Total num of processes created                            =   147
+  Total num of processes terminated                             =  125
+  Total num of processes killed                                 =   16
+        num of processes in CPU ready queue                     =    2
+        num of processes in event waiting queues                =    3
+
+  Total num of memory references                           =  993
+
+
+CPU utilization                                      =     0.4993
+
+
+Total num of pages swapped in                        =   654
+  due to page faults ( = number of pagefaults )            =   498
+  due to page locks set by I/O                             =   156
+  due to prepaging                                         =     0
+
+Total num of pages swapped out                       =    48
+  due to page faults                                       =    39
+  due to page locks set by I/O                             =     9
+  due to prepaging                                         =     0
+
+Memory utilization                                   =     0.6335
+
+System throughput ( x 1000 )                         =     4.1642
+Average num of processes during simulation           =     5.4277
+Average CPU time per process                         =   109.3469
+Average waiting time per process                     =  1003.6871
+Average turnaround time per process                  =  1108.3605
+
+
+
+
+
+
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+::                                                               ::
+::                  Snapshot at clock :  40003                   ::
+::                                                               ::
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+
+               S I M C O R E   F R A M E   T A B L E 
+*******************************************************************
+* 0 0 0 0 0 0 0 0 0 0 1 1 1 1 1 1 1 1 1 1 2 2 2 2 2 2 2 2 2 2 3 3 *=Frame_id
+* 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 *
+*-----------------------------------------------------------------*
+* 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 *=Pcb_id
+* 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 *
+* 8 8 7 7 7 8 8 8 7 8 8 7 7 8 7 8 8 8 8 8 7 8 8 8 8 8 8 8 8 8 8 8 *
+* 7 7 9 9 9 7 5 7 7 7 7 7 7 2 7 5 8 5 3 3 7 8 7 8 7 9 8 5 9 8 8 9 *
+*-----------------------------------------------------------------*
+* 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 *=Page_id
+* 4 0 1 0 2 5 5 6 2 3 2 1 7 0 4 2 0 6 0 1 0 1 8 3 7 4 5 1 2 0 2 6 *
+*-----------------------------------------------------------------*
+* 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 *=Lock_count
+*-----------------------------------------------------------------*
+* C D D D D D D C D C D C C D D D C D D D D C C D C D C D D D C C *=Dirty/Clean
+*-----------------------------------------------------------------*
+* n n n n n n n n n n n n n n n n n n n n n n n n n n n n n n n n *=Free/Not
+*******************************************************************
+
+
+
+=====================  Summary of Statistics  ====================
+
+Total num of processes created                            =   190
+  Total num of processes terminated                             =  163
+  Total num of processes killed                                 =   19
+        num of processes in CPU ready queue                     =    2
+        num of processes in event waiting queues                =    5
+
+  Total num of memory references                           = 1313
+
+
+CPU utilization                                      =     0.4848
+
+
+Total num of pages swapped in                        =   867
+  due to page faults ( = number of pagefaults )            =   653
+  due to page locks set by I/O                             =   214
+  due to prepaging                                         =     0
+
+Total num of pages swapped out                       =    67
+  due to page faults                                       =    56
+  due to page locks set by I/O                             =    11
+  due to prepaging                                         =     0
+
+Memory utilization                                   =     0.6299
+
+System throughput ( x 1000 )                         =     4.0747
+Average num of processes during simulation           =     5.5011
+Average CPU time per process                         =   108.0368
+Average waiting time per process                     =  1053.0895
+Average turnaround time per process                  =  1158.2158
+
+
+
+
+
+
+
+====================     End of Simulation     ====================
+
+
+
+
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+::                                                               ::
+::                  Snapshot at clock :  40003                   ::
+::                                                               ::
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+
+               S I M C O R E   F R A M E   T A B L E 
+*******************************************************************
+* 0 0 0 0 0 0 0 0 0 0 1 1 1 1 1 1 1 1 1 1 2 2 2 2 2 2 2 2 2 2 3 3 *=Frame_id
+* 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 *
+*-----------------------------------------------------------------*
+* 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 *=Pcb_id
+* 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 *
+* 8 8 7 7 7 8 8 8 7 8 8 7 7 8 7 8 8 8 8 8 7 8 8 8 8 8 8 8 8 8 8 8 *
+* 7 7 9 9 9 7 5 7 7 7 7 7 7 2 7 5 8 5 3 3 7 8 7 8 7 9 8 5 9 8 8 9 *
+*-----------------------------------------------------------------*
+* 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 *=Page_id
+* 4 0 1 0 2 5 5 6 2 3 2 1 7 0 4 2 0 6 0 1 0 1 8 3 7 4 5 1 2 0 2 6 *
+*-----------------------------------------------------------------*
+* 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 *=Lock_count
+*-----------------------------------------------------------------*
+* C D D D D D D C D C D C C D D D C D D D D C C D C D C D D D C C *=Dirty/Clean
+*-----------------------------------------------------------------*
+* n n n n n n n n n n n n n n n n n n n n n n n n n n n n n n n n *=Free/Not
+*******************************************************************
+
+
+
+=====================  Summary of Statistics  ====================
+
+Total num of processes created                            =   190
+  Total num of processes terminated                             =  163
+  Total num of processes killed                                 =   19
+        num of processes in CPU ready queue                     =    2
+        num of processes in event waiting queues                =    5
+
+  Total num of memory references                           = 1313
+
+
+CPU utilization                                      =     0.4848
+
+
+Total num of pages swapped in                        =   867
+  due to page faults ( = number of pagefaults )            =   653
+  due to page locks set by I/O                             =   214
+  due to prepaging                                         =     0
+
+Total num of pages swapped out                       =    67
+  due to page faults                                       =    56
+  due to page locks set by I/O                             =    11
+  due to prepaging                                         =     0
+
+Memory utilization                                   =     0.6299
+
+System throughput ( x 1000 )                         =     4.0747
+Average num of processes during simulation           =     5.5011
+Average CPU time per process                         =   108.0368
+Average waiting time per process                     =  1053.0895
+Average turnaround time per process                  =  1158.2158
+
+
+
+
