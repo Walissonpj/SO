@@ -1,8 +1,8 @@
 
 /****************************************************************************/
 /*                                                                          */
-/* 			     Module MEMORY                                  */
-/* 			External Declarations 	                            */
+/*               Module MEMORY                                  */
+/*          External Declarations                               */
 /*                                                                          */
 /****************************************************************************/
 
@@ -113,7 +113,7 @@ extern struct iorb_node {
 extern struct int_vector_node {
     INT_TYPE cause;           /* cause of interrupt                         */
     PCB    *pcb;              /* PCB to be started (if startsvc) or pcb that*/
-			      /* caused page fault (if fagefault interrupt) */
+                  /* caused page fault (if fagefault interrupt) */
     int    page_id;           /* page causing pagefault                     */
     int    dev_id;            /* device causing devint                      */
     EVENT  *event;            /* event involved in waitsvc and sigsvc calls */
@@ -124,10 +124,10 @@ extern struct int_vector_node {
 
 /* extern variables */
 
-extern INT_VECTOR Int_Vector;           /* interrupt vector         	     */
-extern PAGE_TBL *PTBR;                  /* page table base register 	     */
-extern FRAME Frame_Tbl[MAX_FRAME];      /* frame table              	     */
-extern int Prepage_Degree;		/* global degree of prepaging (0-10) */
+extern INT_VECTOR Int_Vector;           /* interrupt vector                  */
+extern PAGE_TBL *PTBR;                  /* page table base register          */
+extern FRAME Frame_Tbl[MAX_FRAME];      /* frame table                       */
+extern int Prepage_Degree;      /* global degree of prepaging (0-10) */
 
 
 
@@ -154,15 +154,15 @@ extern gen_int_handler();
 /****************************************************************************/
 
 typedef struct Pagina{
-	int id;
-	struct Pagina *next;
-	struct Pagina *prev;
+    int id;
+    struct Pagina *next;
+    struct Pagina *prev;
 }Pagina;
 
 typedef struct Fila{
-	int tamanho;
-	Pagina *inicio;
-	Pagina *fim;
+    int tamanho;
+    Pagina *inicio;
+    Pagina *fim;
 }Fila;
 
 Fila PTFila;
@@ -178,35 +178,35 @@ Pagina *newPage(int id){
 void insereFrame(int id){
     Pagina *page = newPage(id);
     if(PTFila.tamanho == 0){ // se a fila estiver vazia faz o nó ser o primeiro, onde o inicio e fim aponta para o mesmo no
-		page->next = page;
-		page->prev = page;
-		PTFila.inicio = page; // faz o inicio apontar para o novo nó
-		PTFila.fim = page; // faz o fim apontar para o novo nó
-		PTFila.tamanho=1;
-	}else{ // se a fila tiver pelo menos um elemento então vou fazer apenas o novo nó apontar para o inicio e o apontar para o penultimo
-		page->next = PTFila.inicio; // faz o proximo do novo nó apontar para o inicio
-		page->prev = PTFila.fim; // faz o anterior do novo nó apontar para o fim
-		page->next->prev = page; // faz inicio apontar para o novo fim
-		page->prev->next = page;  // faz o antigo fim apontar para o novo nó
-		PTFila.fim = page; // faz o novo nó se tornar o fim
-		PTFila.tamanho++; // aumenta o tamanho da fila
-	}
+        page->next = page;
+        page->prev = page;
+        PTFila.inicio = page; // faz o inicio apontar para o novo nó
+        PTFila.fim = page; // faz o fim apontar para o novo nó
+        PTFila.tamanho=1;
+    }else{ // se a fila tiver pelo menos um elemento então vou fazer apenas o novo nó apontar para o inicio e o apontar para o penultimo
+        page->next = PTFila.inicio; // faz o proximo do novo nó apontar para o inicio
+        page->prev = PTFila.fim; // faz o anterior do novo nó apontar para o fim
+        page->next->prev = page; // faz inicio apontar para o novo fim
+        page->prev->next = page;  // faz o antigo fim apontar para o novo nó
+        PTFila.fim = page; // faz o novo nó se tornar o fim
+        PTFila.tamanho++; // aumenta o tamanho da fila
+    }
 }
 
 int removeFrame(){
-	Pagina *page;
-	page = PTFila.inicio;
-	if( PTFila.tamanho == 1){
-		PTFila.fim = NULL;
-		PTFila.inicio = NULL;
-		PTFila.tamanho = 0;
-	}else{
-		page->prev->next = page->next; // faz o ultimo elemento apontar para o proximo do inicio
-		page->next->prev = page->prev; // faz proximo do inicio apontar para o fim
-		PTFila.inicio = page->next; // faz o inicio da fila ser o proximo do inicio
-		PTFila.tamanho--;
-	}
-	return page->id;
+    Pagina *page;
+    page = PTFila.inicio;
+    if( PTFila.tamanho == 1){
+        PTFila.fim = NULL;
+        PTFila.inicio = NULL;
+        PTFila.tamanho = 0;
+    }else{
+        page->prev->next = page->next; // faz o ultimo elemento apontar para o proximo do inicio
+        page->next->prev = page->prev; // faz proximo do inicio apontar para o fim
+        PTFila.inicio = page->next; // faz o inicio da fila ser o proximo do inicio
+        PTFila.tamanho--;
+    }
+    return page->id;
 }
 
 int segundaChance(){
@@ -224,14 +224,14 @@ int segundaChance(){
 
 void memory_init() // serve para iniciar as estruturas que serão utilizadas
 {
-	int i=0;
-	while( i < MAX_FRAME){ // Frames não referenciados recentemente... Bit R com 0
-	  Frame_Tbl[i].hook = (int *)malloc(sizeof(int));
-	  if(Frame_Tbl[i].hook == NULL)
-	       exit(EXIT_FAILURE);
-	  *(Frame_Tbl[i].hook) = 0;
-	  ++i;
-	}
+    int i=0;
+    while( i < MAX_FRAME){ // Frames não referenciados recentemente... Bit R com 0
+      Frame_Tbl[i].hook = (int *)malloc(sizeof(int));
+      if(Frame_Tbl[i].hook == NULL)
+           exit(EXIT_FAILURE);
+      *(Frame_Tbl[i].hook) = 0;
+      ++i;
+        }
 }
 
 
@@ -255,8 +255,18 @@ PCB *pcb;
 
 void deallocate(pcb)
 PCB *pcb;
-{
-
+{   
+    int frameId, size = ptFila.tamanho;
+    while(size--){
+        frameId = removeFrame();
+        if(Frame_Tbl[frameId].free == false && Frame_Tbl[frameId].pcb->pcb_id == pcb->pcb_id){
+            *Frame_Tbl[frameId].hook = 0;
+            Frame_Tbl[frameId].free = true;
+            Frame_Tbl[frameId].dirty = false;
+            Frame_Tbl[frameId].pcb = 0;
+        }
+        else insertFrame(frameId);
+    }    
 }
 
 
