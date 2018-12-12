@@ -214,12 +214,11 @@ int removeFrame(){
 
 int segundaChance(){
     int page_id = removeFrame(); // pega a pagina do inicio da fila
-    int size = PTFila.tamanho;
-    while( size > 0 && (*Frame_Tbl[page_id].hook != 0 || Frame_Tbl[page_id].lock_count > 0)){ // se a pagina estiver referenciada ou tiver bloqueada então não pode remover... da uma chance pra ela
+    
+    while( *Frame_Tbl[page_id].hook != 0 || Frame_Tbl[page_id].lock_count > 0){ // se a pagina estiver referenciada ou tiver bloqueada então não pode remover... da uma chance pra ela
       *Frame_Tbl[page_id].hook  = 0; // marca como não referenciada
       insereFrame(page_id); // teve sorte... vai pro final da fila
       page_id = removeFrame(); // pega a página do inicio da fila
-      size--;
     }
     *Frame_Tbl[page_id].hook = 1;
     return page_id;
@@ -305,6 +304,7 @@ int page_id;
   Frame_Tbl[id].free = false; // pagina agora está sendo utilizada por um processo
   Frame_Tbl[id].dirty = false; // como acabou de ler e nao modificou fica false mesmo
   Frame_Tbl[id].page_id = page_id; // id da nova pagina carregada
+  Frame_Tbl[id].lock_count = 0; // id da nova pagina carregada
   Frame_Tbl[id].pcb = pcb; // processo da página
   pcb->page_tbl->page_entry[page_id].valid = true; // processo ta referenciando essa pagina
   pcb->page_tbl->page_entry[page_id].frame_id = id; // armazena o endereço fisico da pagina
