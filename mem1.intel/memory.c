@@ -207,6 +207,7 @@ int removeFrame(){
         PTFila.inicio = page->next; // faz o inicio da fila ser o proximo do inicio
         PTFila.tamanho--;
     }
+    free(page);
     return page->id;
 }
 
@@ -291,6 +292,8 @@ int page_id;
   if( id == MAX_FRAME) // se entrar nesse if então está com falta de página...
     id = segundaChance(); // algoritmo responsavel por encontrar uma página para ser removida
  
+  insereFrame(id);
+  
   if(Frame_Tbl[id].free == false){ // se a página estava sendo utilizada por algum processo
     id_page = Frame_Tbl[id].page_id; // pega o id do processo que utilizou essa pagina anteriormente
     Frame_Tbl[id].pcb->page_tbl->page_entry[id_page].valid = false;// agora esse processo não referencia ela mais
@@ -305,6 +308,7 @@ int page_id;
   pcb->page_tbl->page_entry[page_id].valid = true; // processo ta referenciando essa pagina
   pcb->page_tbl->page_entry[page_id].frame_id = id; // armazena o endereço fisico da pagina
  *Frame_Tbl[id].hook = 1;// pagina referenciada recentemente...  
+  
 }
 
 
