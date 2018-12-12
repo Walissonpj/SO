@@ -207,8 +207,9 @@ int removeFrame(){
         PTFila.inicio = page->next; // faz o inicio da fila ser o proximo do inicio
         PTFila.tamanho--;
     }
+    int id = page->id;
     free(page);
-    return page->id;
+    return id;
 }
 
 int segundaChance(){
