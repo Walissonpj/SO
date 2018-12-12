@@ -1,5 +1,5 @@
 // Walisson Pereira de Jesus
-// Misael Mateus Oliveira de Moraes
+// Misael Mateus Oliveira de Morais
 #include<stdlib.h>
 
 /****************************************************************************/
