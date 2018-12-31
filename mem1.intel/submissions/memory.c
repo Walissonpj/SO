@@ -156,22 +156,22 @@ extern gen_int_handler();
 /*                                                                          */
 /****************************************************************************/
 
-typedef struct Pagina{
+typedef struct Frame{ // a fila  composta de quadros, ou seja, os indices das molduras de páginas... memória física
     int id;
-    struct Pagina *next;
-    struct Pagina *prev;
-}Pagina;
+    struct Frame *next;
+    struct Frame *prev;
+}Frame;
 
 typedef struct Fila{
     int tamanho;
-    Pagina *inicio;
-    Pagina *fim;
+    Frame *inicio;
+    Frame *fim;
 }Fila;
 
 Fila PTFila;
 
-Pagina *newPage(int id){
-  Pagina *page = (Pagina *)malloc(sizeof(Pagina));
+Frame *newPage(int id){
+  Frame *page = (Frame *)malloc(sizeof(Frame));
   if( page == NULL)
       exit(EXIT_FAILURE);
   page->id = id;
@@ -179,7 +179,7 @@ Pagina *newPage(int id){
 }
 
 void insereFrame(int id){
-    Pagina *page = newPage(id);
+    Frame *page = newPage(id);
     if(PTFila.tamanho == 0){ // se a fila estiver vazia faz o nó ser o primeiro, onde o inicio e fim aponta para o mesmo no
         page->next = page;
         page->prev = page;
@@ -197,7 +197,7 @@ void insereFrame(int id){
 }
 
 int removeFrame(){
-    Pagina *page;
+    Frame *page;
     page = PTFila.inicio;
     if( PTFila.tamanho == 1){
         PTFila.fim = NULL;
